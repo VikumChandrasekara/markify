@@ -2,30 +2,27 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { marked } from 'marked';
+import Image from 'next/image';
 
 export default function MarkdownGenerator() {
-  const [source, setSource] = useState('# Hello world\n\nStart writing markdown...');
+  const [source, setSource] = useState('# Welcome to Markify.\n\nStart writing markdown...');
   const [filename, setFilename] = useState('post.md');
   const [wordCount, setWordCount] = useState(0);
   const previewRef = useRef<HTMLDivElement>(null);
 
-  // Configure marked for GitHub-flavored markdown
   marked.setOptions({ gfm: true, breaks: true });
 
-  // Live render markdown
-useEffect(() => {
-  const renderMarkdown = async () => {
-    if (previewRef.current) {
-      const html = await Promise.resolve(marked.parse(source)); // ensure string
-      previewRef.current.innerHTML = html;
-      setWordCount(source.trim() ? source.trim().split(/\s+/).length : 0);
-    }
-  };
-  renderMarkdown();
-}, [source]);
+  useEffect(() => {
+    const renderMarkdown = async () => {
+      if (previewRef.current) {
+        const html = await Promise.resolve(marked.parse(source));
+        previewRef.current.innerHTML = html;
+        setWordCount(source.trim() ? source.trim().split(/\s+/).length : 0);
+      }
+    };
+    renderMarkdown();
+  }, [source]);
 
-
-  // Toolbar insert logic
   const insertSnippet = (action: string) => {
     const snippets: Record<string, string> = {
       h1: '# Heading 1\n\n',
@@ -41,7 +38,6 @@ useEffect(() => {
     setSource((prev) => prev + (snippets[action] || ''));
   };
 
-  // Download file
   const handleDownload = () => {
     const blob = new Blob([source], { type: 'text/markdown;charset=utf-8' });
     const a = document.createElement('a');
@@ -53,7 +49,6 @@ useEffect(() => {
     URL.revokeObjectURL(a.href);
   };
 
-  // Copy
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(source);
@@ -63,12 +58,10 @@ useEffect(() => {
     }
   };
 
-  // Clear
   const handleClear = () => {
     if (confirm('Clear editor?')) setSource('');
   };
 
-  // Template
   const handleTemplate = () => {
     const template = `---
 title: My Project
@@ -95,7 +88,6 @@ npm start
     setSource(template);
   };
 
-  // Ctrl/Cmd + S → download
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
@@ -108,127 +100,98 @@ npm start
   }, [source, filename]);
 
   return (
-    <div style={{
-      background: '#0f1724',
-      color: '#e6eef8',
-      fontFamily: 'Inter, Segoe UI, Arial',
-      minHeight: '100vh',
-      margin: 0
-    }}>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '16px',
-        padding: '18px',
-        boxSizing: 'border-box',
-        minHeight: '100vh'
-      }}>
-        {/* Left panel */}
-        <div style={{
-          background: '#0b1220',
-          borderRadius: '10px',
-          padding: '12px',
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          minWidth: 0
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '8px'
-          }}>
+    <div className="min-h-screen bg-[#0f1724] text-[#e6eef8] font-[Inter,Segoe UI,Arial]">
+      <div className="flex flex-col lg:flex-row gap-4 p-4 min-h-screen box-border">
+        {/* Left Panel */}
+        <div className="bg-[#0b1220] rounded-lg p-3 flex flex-col flex-1 min-w-0">
+          <div className="flex justify-between items-center mb-2 flex-wrap gap-3">
             <div>
-              <strong>Markdown Source</strong>
-              <div style={{ fontSize: '0.9rem', color: '#9aa6b2' }}>
+              <Image
+                src="/images/logo.png"
+                alt="Next.js Logo"
+                width={100}
+                height={0}
+                className="h-auto"
+              />
+              <div className="text-sm text-[#9aa6b2]">
                 Type or use the toolbar to insert snippets
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+
+            <div className="flex gap-2 items-center flex-wrap">
               <input
                 type="text"
                 placeholder="post.md"
                 value={filename}
                 onChange={(e) => setFilename(e.target.value)}
-                style={{
-                  padding: '6px',
-                  borderRadius: '8px',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'transparent',
-                  color: 'inherit'
-                }}
+                className="px-2 py-1 rounded-md border border-white/10 bg-transparent text-inherit text-sm outline-none"
               />
-              <button onClick={handleDownload}>Download .md</button>
-              <button onClick={handleCopy}>Copy</button>
-              <button onClick={handleClear}>Clear</button>
+              <button
+                onClick={handleDownload}
+                className="px-3 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm shadow-md transition"
+              >
+                Download .md
+              </button>
+              <button
+                onClick={handleCopy}
+                className="px-3 py-1 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm shadow-md transition"
+              >
+                Copy
+              </button>
+              <button
+                onClick={handleClear}
+                className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm shadow-md transition"
+              >
+                Clear
+              </button>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
+          <div className="flex flex-wrap gap-2 mb-2">
             {['h1', 'h2', 'bold', 'italic', 'code', 'ul', 'link', 'img', 'frontmatter'].map((act) => (
-              <button key={act} onClick={() => insertSnippet(act)}>{act.toUpperCase()}</button>
+              <button
+                key={act}
+                onClick={() => insertSnippet(act)}
+                className="px-2 py-1 bg-[#1a2338] hover:bg-[#22304a] rounded-md text-sm transition border border-white/5"
+              >
+                {act.toUpperCase()}
+              </button>
             ))}
-            <button onClick={handleTemplate}>Use Template</button>
+            <button
+              onClick={handleTemplate}
+              className="px-2 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-md text-sm shadow-md transition"
+            >
+              Use Template
+            </button>
           </div>
 
           <textarea
             value={source}
             onChange={(e) => setSource(e.target.value)}
             rows={12}
-            style={{
-              flex: 1,
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.06)',
-              color: 'inherit',
-              padding: '12px',
-              borderRadius: '8px',
-              fontFamily: 'ui-monospace, monospace',
-              resize: 'none',
-              minHeight: '200px'
-            }}
+            className="flex-1 bg-transparent border border-white/10 text-inherit p-3 rounded-md font-mono resize-none min-h-[200px] focus:ring-1 focus:ring-blue-600 outline-none"
           />
 
-          <div style={{ marginTop: '10px', fontSize: '0.9rem', color: '#9aa6b2' }}>
+          <div className="mt-3 text-sm text-[#9aa6b2]">
             Live preview updates as you type.
           </div>
         </div>
 
-        {/* Right panel */}
-        <div style={{
-          background: '#0b1220',
-          borderRadius: '10px',
-          padding: '12px',
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          minWidth: 0
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '8px'
-          }}>
+        {/* Right Panel */}
+        <div className="bg-[#0b1220] rounded-lg p-3 flex flex-col flex-1 min-w-0">
+          <div className="flex justify-between items-center mb-2">
             <div>
               <strong>Preview</strong>
-              <div style={{ fontSize: '0.9rem', color: '#9aa6b2' }}>GitHub-flavored Markdown</div>
+              <div className="text-sm text-[#9aa6b2]">
+                GitHub-flavored Markdown
+              </div>
             </div>
-            <div style={{ fontSize: '0.9rem', color: '#9aa6b2' }}>{wordCount} words</div>
+            <div className="text-sm text-[#9aa6b2]">{wordCount} words</div>
           </div>
 
           <div
             ref={previewRef}
-            style={{
-              overflow: 'auto',
-              padding: '20px',
-              borderRadius: '8px',
-              background: '#071022',
-              flex: 1,
-              color: '#e6eef8',
-              lineHeight: 1.6,
-            }}
-            className="markdown-preview"
+            className="overflow-auto p-5 rounded-md bg-[#071022] flex-1 text-[#e6eef8] leading-relaxed markdown-preview prose prose-invert max-w-none"
           />
         </div>
       </div>
