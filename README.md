@@ -1,40 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- PROJECT LOGO -->
+<p align="center">
+  <img src="https://github.com/VikumChandrasekara/markify/blob/main/public/images/logo.png?raw=true" alt="Markify Logo" width="200" height="200">
+</p>
 
-## Getting Started
+<h1 align="center">Markify</h1>
 
-First, run the development server:
+<p align="center">
+  <strong>A Modern Markdown Generator & Live Preview Tool for Developers</strong><br />
+  Built with <code>Next.js</code> · Powered by <code>Marked.js</code> · Styled for Productivity
+  <br /><br />
+  <a href="https://github.com/YOUR_USERNAME/markify/issues">Report Bug</a> ·
+  <a href="https://github.com/YOUR_USERNAME/markify/issues">Request Feature</a>
+</p>
 
+---
+
+## ✨ Overview
+
+**Markify** is a powerful, minimalistic, and open-source **Markdown generator** built for developers.  
+It features a real-time **dual-panel interface** — a Markdown editor on the left and a live-rendered **GitHub-flavored Markdown preview** on the right.
+
+With built-in templates, keyboard shortcuts, and instant export options, Markify makes creating and managing Markdown content effortless.
+
+---
+
+## 🧩 Features
+
+| Feature | Description |
+|----------|--------------|
+| ⚡ **Live Preview** | Instantly renders Markdown as you type |
+| 🧠 **GitHub-Flavored Markdown** | Supports headings, code blocks, tables, and lists |
+| 🧰 **Toolbar Shortcuts** | Quickly insert headings, links, lists, and more |
+| 💾 **Export Options** | Download `.md` file or copy to clipboard |
+| 📄 **Frontmatter Templates** | Auto-generate frontmatter for blog posts or docs |
+| ⌨️ **Hotkeys** | `Ctrl/Cmd + S` to save instantly |
+| 🌙 **Dark Theme** | Clean developer-friendly interface |
+| 🧮 **Word Counter** | Displays live word count for writers and devs |
+
+---
+
+## 🖼️ Preview
+
+| Markdown Editor | Live Preview |
+|------------------|--------------|
+| ![Editor Screenshot](https://placehold.co/500x300?text=Editor+Panel) | ![Preview Screenshot](https://placehold.co/500x300?text=Live+Markdown+Preview) |
+
+---
+
+## 🧰 Tech Stack
+
+- ⚛️ **Next.js 14+**
+- 💙 **React 18**
+- 🔷 **TypeScript**
+- ✍️ **Marked.js** — Fast Markdown parser
+- 🎨 **Custom Dark UI** using modern CSS
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## 🪪 License
-This project is licensed under the MIT License – see the [LICENSE](./LICENSE) file for details.
-
+git clone https://github.com/YOUR_USERNAME/markify.git
+cd markify
