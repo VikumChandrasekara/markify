@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.markdown-preview h1 {
+  font-size: 2em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.3em;
+  margin-top: 1em;
+}
+
+.markdown-preview h2 {
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+.markdown-preview p {
+  margin: 0.5em 0;
+}
+
+.markdown-preview code {
+  background: rgba(255,255,255,0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.markdown-preview pre code {
+  display: block;
+  padding: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.markdown-preview a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.markdown-preview a:hover {
+  text-decoration: underline;
+}
+
+.markdown-preview ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.markdown-preview strong {
+  font-weight: bold;
+}
+
