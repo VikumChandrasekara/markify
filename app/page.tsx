@@ -173,7 +173,7 @@ npm start
           />
 
           <div className="mt-3 text-sm text-[#9aa6b2]">
-            Live preview updates as you type.
+            Live preview updates as you type. Use Ctrl+S (Cmd+S on Mac) to download. 
           </div>
         </div>
 
@@ -193,6 +193,13 @@ npm start
             ref={previewRef}
             className="overflow-auto p-5 rounded-md bg-[#071022] flex-1 text-[#e6eef8] leading-relaxed markdown-preview prose prose-invert max-w-none"
           />
+        <a
+          href="https://www.linkedin.com/in/vikumch/"
+          target="_blank"
+          className="fixed bottom-4 right-4 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm shadow-md transition px-4 py-2"
+        >
+          Meet the Developer
+        </a>
         </div>
       </div>
     </div>
