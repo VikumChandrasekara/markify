@@ -107,8 +107,8 @@ npm start
           <div className="flex justify-between items-center mb-2 flex-wrap gap-3">
             <div>
               <Image
-                src="/images/logo.png"
-                alt="Next.js Logo"
+                src="./images/logo.png"
+                alt="Markify Logo"
                 width={100}
                 height={0}
                 className="h-auto"
